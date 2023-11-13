@@ -20,6 +20,7 @@
             <%@include file="template/menu.jsp" %>
             <h1>Bienvenido a Thales Group!</h1>
             <!-- Contiene un artículo -->
+            <!-- Pruebas -->
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <!-- Contenido de cada panel -->
