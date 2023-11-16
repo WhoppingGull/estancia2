@@ -85,6 +85,13 @@ public class ReporteMaquinaServlet extends HttpServlet {
                 if (res != 0) {
                     mensaje = "registro eliminado";
                 }
+            }else if (request.getParameter("btnImprimir") != null) {
+                System.out.println("Entro a imprimir");
+                res = reporteDAO.imprimir(reporte);
+                if (res != 0) {
+                    mensaje = "Se genero el reporte de forma exitosa";
+                    request.getRequestDispatcher("/vistas/imprimirReporte.jsp").forward(request, response);
+                }
             }
 
             request.setAttribute("message", mensaje);

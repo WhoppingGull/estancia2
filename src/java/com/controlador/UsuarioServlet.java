@@ -44,7 +44,7 @@ public class UsuarioServlet extends HttpServlet {
                     System.out.println("Error de conversión de edad: " + e.getMessage());
                 }
             }
-            
+
             String strcodigo = request.getParameter("txtCodigo");
             int cod = 0;  // Valor predeterminado si la cadena está vacía
             if (strcodigo != null && !strcodigo.isEmpty()) {
@@ -66,35 +66,70 @@ public class UsuarioServlet extends HttpServlet {
             //int edad = Integer.parseInt(request.getParameter("txtEdad"));
             String contrasena = request.getParameter("txtContrasena");
             String mensaje = "Error";
+            String user = request.getParameter("user");
+            String contra = request.getParameter("contra");
             int res;
+            boolean buscar = false;
             int activo = 1;
             //System.out.println("cod-"+cod+" edad-"+edad+" nombre-"+nombre+" apellido-"+apellido);
             System.out.println("smdUsuario{" + "idUser=" + cod + ", nombre=" + nombre + ", apellido=" + apellido + ", amaterno=" + amaterno + ", activo=" + activo + ", grupo=" + grupo + ", sexo=" + sexo + ", telefono=" + telefono + ", edad=" + edad + ", contraseña=" + contrasena + '}');
             smdUsuario u = new smdUsuario(cod, nombre, apellido, amaterno, activo, grupo, sexo, telefono, edad, contrasena);
-            
+
             smdUsuarioDAO udao = new smdUsuarioDAO();
             if (request.getParameter("btnGuardar") != null) {
                 res = udao.insertarCliente(u);
                 if (res != 0) {
                     mensaje = "registro agregado";
                 }
-            }else if(request.getParameter("btnEditar") != null){
-                res=udao.modificarUsuario(u);
+            } else if (request.getParameter("btnEditar") != null) {
+                res = udao.modificarUsuario(u);
                 System.out.println("Entro al boton de editar");
                 if (res != 0) {
                     mensaje = "registro modificado";
                 }
-            }else if(request.getParameter("btnEliminar")!= null){
-                res=udao.eliminarUsuario(u);
+            } else if (request.getParameter("btnEliminar") != null) {
+                res = udao.eliminarUsuario(u);
                 if (res != 0) {
                     mensaje = "registro Eliminado";
                 }
+            } else if (request.getParameter("btnBuscarUsuario") != null) {
+                System.out.println("entro a DAO: " + user + "   " + contra);
+                buscar = udao.buscarUsuario(user, contra);
+                if (buscar != false) {
+                    mensaje = "registro Encontrado en la abse de datos";
+                    request.getRequestDispatcher("/vistas/menu1.jsp").forward(request, response);
+                }
+                mensaje = "Usuario o contraseña incorrecto";
+                request.setAttribute("message", mensaje);
+                request.getRequestDispatcher("/vistas/IniciarSesion.jsp").forward(request, response);
+            
+            }else if (request.getParameter("btnImprimir") != null) {
+                System.out.println("Entro a imprimir");
+                res = udao.imprimir(u);
+                if (res != 0) {
+                    mensaje = "Se genero el reporte de forma exitosa";
+                    request.getRequestDispatcher("/vistas/imprimirCliente.jsp").forward(request, response);
+                }
             }
+
+            if (request.getParameter("btnGuardarCrear") != null) {
+                res = udao.insertarCliente(u);
+                if (res != 0) {
+                    mensaje = "registro agregado desde el btnGuardarCrear";
+                    request.setAttribute("message", mensaje);
+                    request.getRequestDispatcher("/vistas/IniciarSesion.jsp").forward(request, response);
+
+                }
+            }
+            
+           
+            
             request.setAttribute("message", mensaje);
             request.getRequestDispatcher("/vistas/clientes.jsp").forward(request, response);
+
         } catch (Exception e) {
             System.out.println("Error de insersion de datos: " + e.getLocalizedMessage());
-            System.out.println("error en servlet: "+e);
+            System.out.println("error en servlet: " + e);
         }
     }
 

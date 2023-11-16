@@ -1,9 +1,8 @@
 <%-- 
-    Document   : perdidas
-    Created on : 10 nov. 2023, 10:48:33
+    Document   : imprimirPerdida
+    Created on : 16 nov. 2023, 10:17:56
     Author     : Diego
 --%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.modelo.smdPerdidas" %>
@@ -17,7 +16,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <!-- comment <script type="text/javascript" src="js/d3.v3.min.js"></script>-->
 
-        <title>Gestion de perdidas</title>
+        <title>Imprecion de perdidas</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     </head>
@@ -29,11 +28,9 @@
             <%@include file="../template/menu.jsp" %>
             <hr>
             <div class="row">
-                <div class="col-8"> <h1>Gestion de perdidas</h1></div>
+                <div class="col-8"> <h1>Impresion de perdidas</h1></div>
                 <div class="col-4 align self-end">
                     <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar</button>
-
                     </div>
                 </div>                                
             </div>
@@ -63,8 +60,7 @@
                             <td class="estatus"><%= perdida.getEstatus()%></td>
                             <td class="fechaPerdida"><%= perdida.getPerdidaTiempo()%></td>
                             <td>
-                                <button type="button" class="btn btn-primary btnEditar" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</button>
-                                <button type="button" class="btn btn-danger btnEliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button>
+                                <button type="submit" name="btnImprimir" class="btn btn-primary btnImprimir" data-bs-toggle="modal" data-bs-target="#exampleModal">Imprimir</button>
                             </td>
                         </tr>
                         <%
@@ -79,9 +75,9 @@
         </div>
         <!-- Button trigger modal -->
         <style>
-          .modal-content {
-            background-color: #fff; /* Puedes ajustar el color blanco según tus preferencias */
-          }
+            .modal-content {
+                background-color: #fff; /* Puedes ajustar el color blanco según tus preferencias */
+            }
         </style>
 
         <!-- Modal -->
@@ -129,9 +125,7 @@
                             <!-- Agrega más campos según tus necesidades -->
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" name="btnEditar" class="btn btn-primary">Editar</button>
-                                    <button type="submit" name="btnGuardar" class="btn btn-success">Guardar</button>
-                                    <button type="submit" name="btnEliminar" class="btn btn-danger">Eliminar</button>
+                                    <button type="submit" name="btnImprimir" class="btn btn-black">Imprimir</button>
                                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
                                 </div>
                             </div>
@@ -193,4 +187,3 @@
     </body>
 
 </html>
-

@@ -30,13 +30,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="${pageContext.servletContext.contextPath}/index.jsp">Inicio</a>
+                    <a class="nav-link active" aria-current="page" href="${pageContext.servletContext.contextPath}/vistas/menu1.jsp">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.servletContext.contextPath}/vistas/clientes.jsp">Usuarios</a>
                 </li>
                  <li class="nav-item">
                     <a class="nav-link" href="${pageContext.servletContext.contextPath}/vistas/reporteMaquina.jsp">Reporte de Máquinas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.servletContext.contextPath}/vistas/perdidas.jsp">Gestión de perdidas</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

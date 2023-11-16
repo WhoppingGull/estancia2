@@ -61,6 +61,10 @@ $(document).ready(function () {
     $(document).on('click', '.btnEliminar', function () {
         llenarFormulario($(this).closest('tr')); 
     });
+    
+    $(document).on('click', '.btnImprimir', function () {
+        llenarFormulario($(this).closest('tr')); 
+    });
 
     function llenarFormulario(fila) {
         var idReporteMaquina = $(fila).find(".codigo").text();

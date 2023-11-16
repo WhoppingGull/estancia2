@@ -1,6 +1,6 @@
 <%-- 
-    Document   : reporteMaquina
-    Created on : 10 nov. 2023, 12:58:07
+    Document   : imprimirReporte
+    Created on : 14 nov. 2023, 1:47:11
     Author     : Diego
 --%>
 
@@ -13,15 +13,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <title>Gestión de reportes de máquina</title>
+        <title>Gestión de reportes de maquina</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
 
-    <script>
-        function convertirAMayusculas(elemento) {
-            elemento.value = elemento.value.toUpperCase();
-        }
-    </script>
     <body>
         <%!
             smdReporteMaquinaDAO reportedaos = new smdReporteMaquinaDAO();
@@ -30,16 +25,15 @@
             <%@include file="../template/menu.jsp" %>
             <hr>
             <div class="row">
-                <div class="col-8"> <h1>Gestión de Reportes</h1></div>
+                <div class="col-8"> <h1>Gestion de Reportes</h1></div>
                 <div class="col-4 align self-end">
                     <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar</button>
                     </div>
                 </div>                                
             </div>
             <hr>           
             <div class="table table-hover">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     <thead>
                     <th>ID Reporte</th>
                     <th>ID Proceso</th>
@@ -83,8 +77,8 @@
                             <td class="recuperados"><%= elem.getRecuperados()%></td>
                             <td class="creationDate"><%= elem.getCreationDate()%></td>
                             <td>
-                                <button type="button" class="btn btn-primary btnEditar" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button><!-- comment -->
-                                <button type="button" class="btn btn-danger btnEliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button>
+                                <button type="submit" name="btnImprimir" class="btn btn-primary btnImprimir" data-bs-toggle="modal" data-bs-target="#exampleModal">Imprimir</button>
+
                             </td>
                         </tr>
                         <%
@@ -100,31 +94,6 @@
             </div>
         </div>
         <!-- Button trigger modal -->
-        <script>
-            function validarFormulario() {
-                var total = parseInt(document.getElementById("txtTotal").value) || 0;
-                var good = parseInt(document.getElementById("txtGood").value) || 0;
-                var bad = parseInt(document.getElementById("txtBad").value) || 0;
-                var recuperados = parseInt(document.getElementById("txtRecuperados").value) || 0;
-
-                // Validar que los valores no sean mayores al total
-                if (good > total || bad > total || recuperados > total) {
-                    alert("Los valores de Good, Bad y Recuperados no pueden ser mayores al Total.");
-                    return false;
-                }
-
-                // Validar que los recuperados no sean mayores a los bad
-                if (recuperados > bad) {
-                    alert("El valor de Recuperados no puede ser mayor que el valor de Bad.");
-                    return false;
-                }
-
-                // Agrega más validaciones según sea necesario
-
-                return true;
-            }
-        </script>
-
 
 
         <!-- Modal -->
@@ -136,7 +105,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="${pageContext.servletContext.contextPath}/ReporteMaquinaServlet" method="POST" role="form" onsubmit="return validarFormulario()">
+                        <form action="${pageContext.servletContext.contextPath}/ReporteMaquinaServlet" method="POST" role="form">
                             <div class="row">
                                 <div class="col-6">
                                     <label>ID Reporte Maquina:</label>
@@ -150,17 +119,17 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label>Batch Oracle:</label>
-                                    <input type="text" name="txtBatchOracle" class="form-control" id="txtBatchOracle" oninput="convertirAMayusculas(this)">
+                                    <input type="text" name="txtBatchOracle" class="form-control" id="txtBatchOracle">
                                 </div>
                                 <div class="col-6">
                                     <label>Batch Local:</label>
-                                    <input type="text" name="txtBatchLocal" class="form-control" id="txtBatchLocal" oninput="convertirAMayusculas(this)">
+                                    <input type="text" name="txtBatchLocal" class="form-control" id="txtBatchLocal">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <label>PA:</label>
-                                    <input type="text" name="txtPa" class="form-control" id="txtPa" oninput="convertirAMayusculas(this)">
+                                    <input type="text" name="txtPa" class="form-control" id="txtPa">
                                 </div>
                                 <div class="col-6">
                                     <label>Total:</label>
@@ -217,12 +186,9 @@
                                     <input type="datetime-local" name="txtCreationDate" class="form-control" id="txtCreationDate">
                                 </div> -->
                             </div>
-                            <br><br>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" name="btnEditar" class="btn btn-primary">Editar</button>
-                                    <button type="submit" name="btnGuardar" class="btn btn-success" >Guardar</button>
-                                    <button type="submit" name="btnEliminar" class="btn btn-danger" >Eliminar</button>
+                                    <button type="submit" name="btnImprimir" class="btn btn-black">Imprimir</button>
 
                                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
                                 </div>
@@ -242,7 +208,7 @@
         <script>alert('<%=request.getAttribute("message")%>')</script>
         <% }%>
         <script src="${pageContext.servletContext.contextPath}/js/reporte.js"></script>
-        <%@include file="../template/footer.jsp" %>
+                <%@include file="../template/footer.jsp" %>
 
     </body>
 

@@ -1,9 +1,9 @@
 <%-- 
-    Document   : clientes
-    Created on : 9 nov. 2023, 12:46:18
+    Document   : imprimirCliente
+    Created on : 16 nov. 2023, 10:43:28
     Author     : Diego
-    Contraseña 1 user 1 tomcat
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.modelo.smdUsuario" %>
@@ -17,7 +17,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <!-- comment <script type="text/javascript" src="js/d3.v3.min.js"></script>-->
 
-        <title>Clientes</title>
+        <title>Imprimir Clientes</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     </head>
@@ -29,10 +29,9 @@
             <%@include file="../template/menu.jsp" %>
             <hr>
             <div class="row">
-                <div class="col-8"> <h1>Gestión de clientes</h1></div>
+                <div class="col-8"> <h1>Imprimir cliente</h1></div>
                 <div class="col-4 align self-end">
                     <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar</button>
 
                     </div>
                 </div>                                
@@ -70,8 +69,8 @@
                             <td class="telefono"><%= elem.getTelefono()%></td>
                             <td class="edad"><%= elem.getEdad()%></td>
                             <td class="contraseña"><%= elem.getContraseña()%></td>
-                            <td><button type="button" class="btn btn-primary btnEditar" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button><!-- comment -->
-                                <button type="button" class="btn btn-danger btnEliminar" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button>
+                            <td>                                
+                                <button type="submit" name="btnImprimir" class="btn btn-primary btnImprimir" data-bs-toggle="modal" data-bs-target="#exampleModal">Imprimir</button>
                             </td>
                         </tr>
                         <%
@@ -266,12 +265,8 @@
                             <br>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit" name="btnEditar" class="btn btn-primary">Editar</button>
-                                    <button type="submit" name="btnGuardar" class="btn btn-success" >Guardar</button>
-                                    <button type="submit" name="btnEliminar" class="btn btn-danger" >Eliminar</button>
-
+                                    <button type="submit" name="btnImprimir" class="btn btn-black">Imprimir</button>
                                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
-
                                 </div>
                             </div>
                         </form>
